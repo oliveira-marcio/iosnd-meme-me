@@ -86,9 +86,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="albumItem" destination="ewe-1c-1sE" id="fCJ-by-P9m"/>
-                        <outlet property="cameraItem" destination="rtw-mC-y0T" id="2YO-NV-k5h"/>
+                        <outlet property="albumButton" destination="ewe-1c-1sE" id="fCJ-by-P9m"/>
+                        <outlet property="bottomTextField" destination="LMK-nA-mXK" id="D1N-cc-mSr"/>
+                        <outlet property="cameraButton" destination="rtw-mC-y0T" id="2YO-NV-k5h"/>
+                        <outlet property="cancelButton" destination="zJG-bs-5yZ" id="xMW-iY-blA"/>
                         <outlet property="imagePickerView" destination="5cC-k1-dAC" id="mSv-IG-OEv"/>
+                        <outlet property="shareButton" destination="qJl-SG-dG0" id="6Sy-WZ-EL2"/>
+                        <outlet property="topTextField" destination="1GR-HG-ykr" id="jxQ-GH-TIv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

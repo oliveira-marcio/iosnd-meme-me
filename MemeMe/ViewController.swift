@@ -9,20 +9,32 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
+    
     @IBOutlet weak var imagePickerView: UIImageView!
-    @IBOutlet weak var albumItem: UIBarButtonItem!
-    @IBOutlet weak var cameraItem: UIBarButtonItem!
+    
+    @IBOutlet weak var albumButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.topTextField.delegate = self
+        self.bottomTextField.delegate = self
+        
+        // TODO: Text should approximate the "Impact" font, all caps, white with a black outline.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.albumItem.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-        self.cameraItem.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        self.albumButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        self.cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
 
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
@@ -71,5 +83,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // TODO: keyboard should not overlap textview
+        // TODO: should remove only default values
+        textField.text = ""
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
