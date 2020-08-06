@@ -26,9 +26,14 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Pick" id="ewe-1c-1sE">
+                                    <barButtonItem title="Album" id="ewe-1c-1sE">
                                         <connections>
-                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="Ai8-oe-4fw"/>
+                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="Ai8-oe-4fw"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Camera" id="rtw-mC-y0T">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="Sv5-k1-t6E"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -42,6 +47,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="albumItem" destination="ewe-1c-1sE" id="fCJ-by-P9m"/>
+                        <outlet property="cameraItem" destination="rtw-mC-y0T" id="2YO-NV-k5h"/>
                         <outlet property="imagePickerView" destination="5cC-k1-dAC" id="mSv-IG-OEv"/>
                     </connections>
                 </viewController>
