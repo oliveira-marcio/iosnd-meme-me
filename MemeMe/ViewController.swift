@@ -139,7 +139,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Keyboard events subscription
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if self.bottomTextField.isEditing {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
     }
     
     @objc func keyboardWillHide() {
