@@ -11,6 +11,13 @@ import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
+    enum DefaultLabels: String {
+        case top = "TOP"
+        case bottom = "BOTTOM"
+    }
+    
+    // MARK: Outlets
+    
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
@@ -22,13 +29,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.topTextField.delegate = self
-        self.bottomTextField.delegate = self
-        
-        // TODO: Text should approximate the "Impact" font, all caps, white with a black outline.
+        setLabel(self.topTextField, text: .top)
+        setLabel(self.bottomTextField, text: .bottom)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +43,45 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.albumButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
         self.cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
+    
+    // MARK: Label Appearence and Delegate Methods
+    
+    private func setLabel(_ textField: UITextField, text: DefaultLabels) {
+        let memeTextAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.strokeWidth: -2.0
+        ]
+        
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.text = text.rawValue
+
+        textField.delegate = self
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // TODO: keyboard should not overlap textview
+        let currentText = textField.text!.uppercased() as String
+        if (currentText == DefaultLabels.top.rawValue || currentText == DefaultLabels.bottom.rawValue) {
+            textField.text = ""
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var newText = textField.text! as NSString
+        newText = newText.replacingCharacters(in: range, with: string) as NSString
+        textField.text = newText.uppercased
+        return false
+    }
+    
+    // MARK: Image Picking and Delegate Methods
 
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         self.pickAnImage(from: .photoLibrary)
@@ -75,23 +121,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             self.imagePickerView.image = image
+            self.topTextField.text = DefaultLabels.top.rawValue
+            self.bottomTextField.text = DefaultLabels.bottom.rawValue
         }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // TODO: keyboard should not overlap textview
-        // TODO: should remove only default values
-        textField.text = ""
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
 
