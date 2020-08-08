@@ -63,7 +63,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="pug-Yl-ruA"/>
-                                    <barButtonItem title="Cancel" id="zJG-bs-5yZ"/>
+                                    <barButtonItem title="Cancel" id="zJG-bs-5yZ">
+                                        <connections>
+                                            <action selector="cancelMeme:" destination="BYZ-38-t0r" id="mXU-sO-tUM"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

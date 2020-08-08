@@ -41,6 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.shareButton.isEnabled = false
         setLabel(self.topTextField, text: .top)
         setLabel(self.bottomTextField, text: .bottom)
     }
@@ -69,6 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = .center
+        textField.adjustsFontSizeToFitWidth = true
         textField.text = text.rawValue
 
         textField.delegate = self
@@ -94,7 +96,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Image Picking and Delegate Methods
-
+    
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         self.pickAnImage(from: .photoLibrary)
     }
@@ -133,8 +135,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             self.imagePickerView.image = image
-            self.topTextField.text = DefaultLabels.top.rawValue
-            self.bottomTextField.text = DefaultLabels.bottom.rawValue
+            self.shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -184,12 +185,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: Meme Generation
     
-    private func showAlert(_ title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     private func saveMeme() {
         if let originalImage = imagePickerView.image {
             let meme = Meme(
@@ -199,8 +194,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 memedImage: generateMemedImage()
             )
             print(meme.originalImage)
-        } else {
-            showAlert("Oops", message: "Please select an image first.")
         }
     }
     
@@ -228,6 +221,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
        
         let croppedCGImage:CGImage = (image.cgImage?.cropping(to: cropRect))!
         return UIImage(cgImage: croppedCGImage)
+    }
+    
+    @IBAction func cancelMeme(_ sender: Any) {
+        self.topTextField.text = DefaultLabels.top.rawValue
+        self.bottomTextField.text = DefaultLabels.bottom.rawValue
+        self.imagePickerView.image = nil
+        self.shareButton.isEnabled = false
     }
     
     // MARK: Meme Sharing
