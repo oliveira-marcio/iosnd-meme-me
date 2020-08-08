@@ -184,29 +184,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: Meme Generation
-    
-    private func saveMeme() {
-        if let originalImage = imagePickerView.image {
-            let meme = Meme(
-                topText: topTextField.text!,
-                bottomText: bottomTextField.text!,
-                originalImage: originalImage,
-                memedImage: generateMemedImage()
-            )
-            print(meme.originalImage)
-        }
-    }
-    
+
     private func generateMemedImage() -> UIImage {
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
-        return cropImage(memedImage)
+        return cropMemedImage(memedImage)
     }
     
-    private func cropImage(_ image: UIImage) -> UIImage {
+    private func cropMemedImage(_ image: UIImage) -> UIImage {
         var topbarHeight: CGFloat {
             return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
                 (self.navigationController?.navigationBar.frame.height ?? 0.0)
@@ -233,7 +221,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: Meme Sharing
     
     @IBAction func shareMeme(_ sender: Any) {
-        self.saveMeme()
+        if let originalImage = imagePickerView.image {
+            let memedImage = self.generateMemedImage()
+            
+            let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+            activityController.completionWithItemsHandler = { (_, completed, _, _) in
+                if (completed) {
+                    let savedMeme = self.saveMeme(
+                        topLabel: self.topTextField.text ?? "",
+                        bottomLabel: self.bottomTextField.text ?? "",
+                        originalImage: originalImage,
+                        memedImage: memedImage
+                    )
+                    print("Meme saved: \(savedMeme)")
+                }
+            }
+            
+            self.present(activityController, animated: true, completion: nil)
+        } else {
+            showAlert("Oops", message: "Something went wrong. Please try again.")
+        }
+    }
+    
+    private func saveMeme(topLabel: String, bottomLabel: String, originalImage: UIImage, memedImage: UIImage) -> Meme {
+        return Meme(
+            topText: topLabel,
+            bottomText: bottomLabel,
+            originalImage: originalImage,
+            memedImage: memedImage
+        )
+    }
+    
+    private func showAlert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
-
