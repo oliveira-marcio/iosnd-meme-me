@@ -16,16 +16,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         case bottom = "BOTTOM"
     }
     
+    struct Meme {
+        var topText: String
+        var bottomText: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+    }
+    
     // MARK: Outlets
     
+    @IBOutlet weak var shareToolbar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    
     @IBOutlet weak var imagePickerView: UIImageView!
     
+    @IBOutlet weak var photoToolbar: UIToolbar!
     @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
@@ -33,7 +41,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setLabel(self.topTextField, text: .top)
         setLabel(self.bottomTextField, text: .bottom)
     }
@@ -173,6 +180,60 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private func unsubscribeToKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // MARK: Meme Generation
+    
+    private func showAlert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func saveMeme() {
+        if let originalImage = imagePickerView.image {
+            let meme = Meme(
+                topText: topTextField.text!,
+                bottomText: bottomTextField.text!,
+                originalImage: originalImage,
+                memedImage: generateMemedImage()
+            )
+            print(meme.originalImage)
+        } else {
+            showAlert("Oops", message: "Please select an image first.")
+        }
+    }
+    
+    private func generateMemedImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        return cropImage(memedImage)
+    }
+    
+    private func cropImage(_ image: UIImage) -> UIImage {
+        var topbarHeight: CGFloat {
+            return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
+                (self.navigationController?.navigationBar.frame.height ?? 0.0)
+        }
+               
+        let cropRect = CGRect(
+            x: 0.0,
+            y: shareToolbar.frame.height + topbarHeight,
+            width: self.view.frame.width,
+            height: self.view.frame.height - shareToolbar.frame.height - photoToolbar.frame.height - topbarHeight
+        )
+       
+        let croppedCGImage:CGImage = (image.cgImage?.cropping(to: cropRect))!
+        return UIImage(cgImage: croppedCGImage)
+    }
+    
+    // MARK: Meme Sharing
+    
+    @IBAction func shareMeme(_ sender: Any) {
+        self.saveMeme()
     }
 }
 
