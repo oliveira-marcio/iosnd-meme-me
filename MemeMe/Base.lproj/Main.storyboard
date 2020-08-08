@@ -26,14 +26,15 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="L6i-ZX-sUQ"/>
+                                    <barButtonItem title="Camera" image="camera.fill" catalog="system" id="rtw-mC-y0T">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="Sv5-k1-t6E"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Nd5-oy-Yn1"/>
                                     <barButtonItem title="Album" id="ewe-1c-1sE">
                                         <connections>
                                             <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="Ai8-oe-4fw"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Camera" id="rtw-mC-y0T">
-                                        <connections>
-                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="Sv5-k1-t6E"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="k8v-G8-xG7"/>
@@ -57,7 +58,7 @@
                                     <constraint firstAttribute="height" constant="44" id="KlS-iz-p56"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Share" id="qJl-SG-dG0">
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="qJl-SG-dG0">
                                         <connections>
                                             <action selector="shareMeme:" destination="BYZ-38-t0r" id="6lB-3c-qID"/>
                                         </connections>
@@ -110,4 +111,8 @@
             <point key="canvasLocation" x="132" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
 </document>
