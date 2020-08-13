@@ -16,13 +16,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         case bottom = "BOTTOM"
     }
     
-    struct Meme {
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
     // MARK: Outlets
     
     @IBOutlet weak var shareToolbar: UIToolbar!
@@ -227,13 +220,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             activityController.completionWithItemsHandler = { (_, completed, _, _) in
                 if (completed) {
-                    let savedMeme = self.saveMeme(
+                    self.saveMeme(
                         topLabel: self.topTextField.text ?? "",
                         bottomLabel: self.bottomTextField.text ?? "",
                         originalImage: originalImage,
                         memedImage: memedImage
                     )
-                    print("Meme saved: \(savedMeme)")
                 }
             }
             
@@ -243,13 +235,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    private func saveMeme(topLabel: String, bottomLabel: String, originalImage: UIImage, memedImage: UIImage) -> Meme {
-        return Meme(
+    private func saveMeme(topLabel: String, bottomLabel: String, originalImage: UIImage, memedImage: UIImage) {
+        let savedMeme = Meme(
             topText: topLabel,
             bottomText: bottomLabel,
             originalImage: originalImage,
             memedImage: memedImage
         )
+        
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(savedMeme)
+        
+        print("Memes saved: \(appDelegate.memes)")
     }
     
     private func showAlert(_ title: String, message: String) {
