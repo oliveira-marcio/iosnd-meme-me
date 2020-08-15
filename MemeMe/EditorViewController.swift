@@ -205,10 +205,7 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func cancelMeme(_ sender: Any) {
-        self.topTextField.text = DefaultLabels.top.rawValue
-        self.bottomTextField.text = DefaultLabels.bottom.rawValue
-        self.imagePickerView.image = nil
-        self.shareButton.isEnabled = false
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: Meme Sharing

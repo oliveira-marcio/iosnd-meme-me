@@ -81,7 +81,13 @@
                             <outlet property="delegate" destination="Y8B-i9-MAI" id="Z6B-gX-ulI"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="VqC-IT-Jg1"/>
+                    <navigationItem key="navigationItem" id="VqC-IT-Jg1">
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="cg3-Vg-F8s">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="0GI-R0-5Tn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8K-so-bnb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -127,7 +133,13 @@
                             <outlet property="delegate" destination="yCa-pF-EdB" id="32H-R1-6I9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="P8Y-oW-ctS"/>
+                    <navigationItem key="navigationItem" id="P8Y-oW-ctS">
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="ksB-k1-Ml9">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="gJ5-Jj-u7q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJo-Ac-rwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -220,6 +232,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="jRF-5B-xst"/>
                     <connections>
                         <outlet property="albumButton" destination="ewe-1c-1sE" id="fCJ-by-P9m"/>
                         <outlet property="bottomTextField" destination="LMK-nA-mXK" id="D1N-cc-mSr"/>
@@ -237,6 +250,9 @@
             <point key="canvasLocation" x="622" y="-29"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="0GI-R0-5Tn"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="LaunchImage" width="1536" height="2048"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
