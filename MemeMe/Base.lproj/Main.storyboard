@@ -26,11 +26,11 @@
             </objects>
             <point key="canvasLocation" x="-1885" y="385"/>
         </scene>
-        <!--Collection-->
+        <!--Navigation Controller-->
         <scene sceneID="xFJ-nM-jjm">
             <objects>
                 <navigationController id="Tjr-ar-wIx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="8zz-bg-lg1"/>
+                    <tabBarItem key="tabBarItem" title="" image="CollectionButton" id="8zz-bg-lg1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QNe-MZ-aGU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -82,7 +82,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="VqC-IT-Jg1">
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="cg3-Vg-F8s">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="cg3-Vg-F8s">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="0GI-R0-5Tn"/>
                             </connections>
@@ -93,11 +93,11 @@
             </objects>
             <point key="canvasLocation" x="-255" y="690"/>
         </scene>
-        <!--Table-->
+        <!--Navigation Controller-->
         <scene sceneID="A1s-Fd-eeZ">
             <objects>
                 <navigationController id="ddj-x4-GRv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table" id="vYp-QK-7Zh"/>
+                    <tabBarItem key="tabBarItem" title="" image="TableButton" id="vYp-QK-7Zh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PQg-LK-HnT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -134,7 +134,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="P8Y-oW-ctS">
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="ksB-k1-Ml9">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ksB-k1-Ml9">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="gJ5-Jj-u7q"/>
                             </connections>
@@ -254,8 +254,11 @@
         <segue reference="0GI-R0-5Tn"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="CollectionButton" width="30" height="30.5"/>
         <image name="LaunchImage" width="1536" height="2048"/>
+        <image name="TableButton" width="30" height="30"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
     </resources>
 </document>
