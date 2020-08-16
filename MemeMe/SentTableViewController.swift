@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentTableViewController: UITableViewController, RefreshDataDelegate {
+class SentTableViewController: UITableViewController, MameUpdateDelegate {
 
     // MARK: - Outlets and Models
 
@@ -24,16 +24,16 @@ class SentTableViewController: UITableViewController, RefreshDataDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let editorController = segue.destination as! EditorViewController
-        editorController.refreshDataDelegate = self
+        editorController.memeUpdateDelegate = self
     }
 
-    func refreshData() {
+    func onMemeUpdated(_ meme: Meme) {
         self.sentMemeTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshData()
+        self.sentMemeTableView.reloadData()
     }
     
     // MARK: - Table view data source

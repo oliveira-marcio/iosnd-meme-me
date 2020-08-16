@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentCollectionViewController: UICollectionViewController, RefreshDataDelegate {
+class SentCollectionViewController: UICollectionViewController, MameUpdateDelegate {
     
     // MARK: - Outlets and Models
     
@@ -25,10 +25,10 @@ class SentCollectionViewController: UICollectionViewController, RefreshDataDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let editorController = segue.destination as! EditorViewController
-        editorController.refreshDataDelegate = self
+        editorController.memeUpdateDelegate = self
     }
 
-    func refreshData() {
+    func onMemeUpdated(_ meme: Meme) {
         self.sentMemeCollectionView.reloadData()
     }
     
@@ -41,7 +41,7 @@ class SentCollectionViewController: UICollectionViewController, RefreshDataDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshData()
+        self.sentMemeCollectionView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

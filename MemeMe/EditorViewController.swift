@@ -9,10 +9,10 @@
 import UIKit
 import AVFoundation
 
-// MARK Protocol to delegate refresh meme updates
+// MARK Protocol to delegate meme updates
 
-protocol RefreshDataDelegate {
-    func refreshData()
+protocol MameUpdateDelegate {
+    func onMemeUpdated(_ meme: Meme)
 }
 
 class EditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
@@ -22,7 +22,8 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         case bottom = "BOTTOM"
     }
     
-    var refreshDataDelegate: RefreshDataDelegate?
+    var memeUpdateDelegate: MameUpdateDelegate?
+    var memeToEdit: Meme?
     
     // MARK: Outlets
     
@@ -42,9 +43,17 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.shareButton.isEnabled = false
-        setLabel(self.topTextField, text: .top)
-        setLabel(self.bottomTextField, text: .bottom)
+        self.setLabel(self.topTextField, text: .top)
+        self.setLabel(self.bottomTextField, text: .bottom)
+
+        if let memeToEdit = self.memeToEdit {
+            self.imagePickerView.image = memeToEdit.originalImage
+            self.topTextField.text = memeToEdit.topText
+            self.bottomTextField.text = memeToEdit.bottomText
+            self.shareButton.isEnabled = true
+        } else {
+            self.shareButton.isEnabled = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,7 +140,6 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         pickController.sourceType = sourceType
         present(pickController, animated: true, completion: nil)
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
@@ -252,7 +260,7 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(savedMeme)
         
-        refreshDataDelegate?.refreshData()
+        memeUpdateDelegate?.onMemeUpdated(savedMeme)
     }
     
     private func showAlert(_ title: String, message: String) {

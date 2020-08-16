@@ -127,6 +127,7 @@
                     </view>
                     <connections>
                         <outlet property="memedImageView" destination="Egf-OH-zNS" id="oeP-li-tkQ"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showEditor" modalPresentationStyle="fullScreen" id="z9c-fC-MOG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntn-HC-3o7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -335,7 +336,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0GI-R0-5Tn"/>
+        <segue reference="z9c-fC-MOG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CollectionButton" width="30" height="30.5"/>
