@@ -8,19 +8,35 @@
 
 import UIKit
 
-class SentCollectionViewController: UICollectionViewController {
+class SentCollectionViewController: UICollectionViewController, RefreshDataDelegate {
     
-    var memes = [Meme]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    // MARK: - Outlets and Models
+    
+    @IBOutlet weak var sentMemeCollectionView: UICollectionView!
+    
+    var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+        return appDelegate.memes
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - Refresh Data Delegate
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let editorController = segue.destination as! EditorViewController
+        editorController.refreshDataDelegate = self
+    }
+
+    func refreshData() {
+        self.sentMemeCollectionView.reloadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.refreshData()
+    }
+    
+    // MARK: Collection View Data Source
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items

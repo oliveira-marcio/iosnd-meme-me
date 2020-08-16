@@ -9,12 +9,18 @@
 import UIKit
 import AVFoundation
 
+protocol RefreshDataDelegate {
+    func refreshData()
+}
+
 class EditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     enum DefaultLabels: String {
         case top = "TOP"
         case bottom = "BOTTOM"
     }
+    
+    var refreshDataDelegate: RefreshDataDelegate?
     
     // MARK: Outlets
     
@@ -244,6 +250,7 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(savedMeme)
         
+        refreshDataDelegate?.refreshData()
         print("Memes saved: \(appDelegate.memes)")
     }
     

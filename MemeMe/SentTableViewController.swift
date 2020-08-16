@@ -8,18 +8,34 @@
 
 import UIKit
 
-class SentTableViewController: UITableViewController {
-    
-    var memes = [Meme]()
+class SentTableViewController: UITableViewController, RefreshDataDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    // MARK: - Outlets and Models
+
+    @IBOutlet weak var sentMemeTableView: UITableView!
+    
+    var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
-        self.memes = appDelegate.memes
+        return appDelegate.memes
+    }
+    
+    // MARK: - Refresh Data Delegate
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let editorController = segue.destination as! EditorViewController
+        editorController.refreshDataDelegate = self
     }
 
+    func refreshData() {
+        self.sentMemeTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.refreshData()
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
