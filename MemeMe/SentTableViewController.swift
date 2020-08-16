@@ -43,12 +43,18 @@ class SentTableViewController: UITableViewController, RefreshDataDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath) as! MemeTableViewCell
         let meme = self.memes[indexPath.row]
         
-        cell.textLabel?.text = "\(meme.topText) \(meme.bottomText)"
+        cell.memeImageView?.image = meme.memedImage
+        cell.memeTopLabel?.text = meme.topText
+        cell.memeBottomLabel?.text = meme.bottomText
 
         return cell
+    }
+    
+    func cropImage(image: UIImage) {
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

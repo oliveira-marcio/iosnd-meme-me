@@ -122,13 +122,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" id="ccj-4W-gz4">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" id="ccj-4W-gz4" customClass="MemeTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ccj-4W-gz4" id="VCv-cn-CIl">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OEt-uW-pRI">
+                                            <rect key="frame" x="8" y="0.0" width="80" height="80.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="Hhw-XW-DdG"/>
+                                                <constraint firstAttribute="height" constant="80" id="Zrb-c3-7dh"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWv-5o-Jvx">
+                                            <rect key="frame" x="104" y="11" width="247" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="qRK-2h-PEG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSw-bl-xCq">
+                                            <rect key="frame" x="104" y="40" width="247" height="29.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MSw-bl-xCq" firstAttribute="leading" secondItem="OEt-uW-pRI" secondAttribute="trailing" constant="16" id="0wn-zo-UxZ"/>
+                                        <constraint firstItem="OEt-uW-pRI" firstAttribute="top" secondItem="VCv-cn-CIl" secondAttribute="top" id="4JR-4b-paM"/>
+                                        <constraint firstItem="MSw-bl-xCq" firstAttribute="top" secondItem="dWv-5o-Jvx" secondAttribute="bottom" constant="8" id="5Md-ui-qde"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dWv-5o-Jvx" secondAttribute="trailing" constant="8" id="6pN-ZE-UBA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MSw-bl-xCq" secondAttribute="trailing" constant="8" id="JYD-9d-lTT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="MSw-bl-xCq" secondAttribute="bottom" id="QpQ-QA-cfV"/>
+                                        <constraint firstItem="dWv-5o-Jvx" firstAttribute="leading" secondItem="OEt-uW-pRI" secondAttribute="trailing" constant="16" id="VF1-0V-H7T"/>
+                                        <constraint firstAttribute="bottom" secondItem="OEt-uW-pRI" secondAttribute="bottom" id="jwf-Xp-qCE"/>
+                                        <constraint firstItem="OEt-uW-pRI" firstAttribute="leading" secondItem="VCv-cn-CIl" secondAttribute="leading" constant="8" id="kQl-ke-Ym0"/>
+                                        <constraint firstItem="dWv-5o-Jvx" firstAttribute="top" secondItem="VCv-cn-CIl" secondAttribute="topMargin" id="ybV-Yp-mTh"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="memeBottomLabel" destination="MSw-bl-xCq" id="IbK-xx-v8P"/>
+                                    <outlet property="memeImageView" destination="OEt-uW-pRI" id="lIr-TE-zKg"/>
+                                    <outlet property="memeTopLabel" destination="dWv-5o-Jvx" id="ax9-X4-ZG1"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -257,7 +298,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0GI-R0-5Tn"/>
+        <segue reference="gJ5-Jj-u7q"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CollectionButton" width="30" height="30.5"/>

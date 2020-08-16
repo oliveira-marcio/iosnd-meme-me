@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+// MARK Protocol to delegate refresh meme updates
+
 protocol RefreshDataDelegate {
     func refreshData()
 }
@@ -251,7 +253,6 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         appDelegate.memes.append(savedMeme)
         
         refreshDataDelegate?.refreshData()
-        print("Memes saved: \(appDelegate.memes)")
     }
     
     private func showAlert(_ title: String, message: String) {
