@@ -66,9 +66,9 @@ class SentCollectionViewController: UICollectionViewController, RefreshDataDeleg
 
         let dimension = (horizontalViewDimension - (spacesBetweenCols * space)) / numOfCols
         
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        self.flowLayout.minimumInteritemSpacing = space
+        self.flowLayout.minimumLineSpacing = space
+        self.flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
     
     // MARK: Collection View Data Source
@@ -87,6 +87,8 @@ class SentCollectionViewController: UICollectionViewController, RefreshDataDeleg
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-        print(self.memes[indexPath.row])
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        detailController.meme = self.memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
 }

@@ -104,6 +104,35 @@
             </objects>
             <point key="canvasLocation" x="-255.19999999999999" y="689.5052473763119"/>
         </scene>
+        <!--Details View Controller-->
+        <scene sceneID="0W9-ET-AVv">
+            <objects>
+                <viewController storyboardIdentifier="DetailsViewController" id="tID-Bj-kJO" customClass="DetailsViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A8p-kP-A8N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Egf-OH-zNS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PqZ-4i-PFk" firstAttribute="bottom" secondItem="Egf-OH-zNS" secondAttribute="bottom" id="9z0-mc-UB8"/>
+                            <constraint firstItem="Egf-OH-zNS" firstAttribute="trailing" secondItem="PqZ-4i-PFk" secondAttribute="trailing" id="BmN-z8-BUJ"/>
+                            <constraint firstItem="Egf-OH-zNS" firstAttribute="top" secondItem="PqZ-4i-PFk" secondAttribute="top" id="Upz-aP-PRo"/>
+                            <constraint firstItem="Egf-OH-zNS" firstAttribute="leading" secondItem="PqZ-4i-PFk" secondAttribute="leading" id="pj6-aV-HO2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PqZ-4i-PFk"/>
+                    </view>
+                    <connections>
+                        <outlet property="memedImageView" destination="Egf-OH-zNS" id="oeP-li-tkQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntn-HC-3o7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="621.60000000000002" y="689.5052473763119"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="A1s-Fd-eeZ">
             <objects>

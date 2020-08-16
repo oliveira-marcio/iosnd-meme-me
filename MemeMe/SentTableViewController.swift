@@ -53,11 +53,9 @@ class SentTableViewController: UITableViewController, RefreshDataDelegate {
         return cell
     }
     
-    func cropImage(image: UIImage) {
-        
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(self.memes[indexPath.row])
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        detailController.meme = self.memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
 }
